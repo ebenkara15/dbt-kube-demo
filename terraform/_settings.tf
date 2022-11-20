@@ -12,7 +12,12 @@ terraform {
   }
 }
 
-provider "google" {
+locals {
   project = "kube-dbt-demo"
   region  = "europe-west1"
+}
+
+provider "google" {
+  project = local.project
+  region  = local.region
 }

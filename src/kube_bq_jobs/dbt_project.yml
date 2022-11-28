@@ -1,0 +1,17 @@
+name: "kube_bq_jobs"
+version: "1.0.0"
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: "kube_bq_jobs"
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+
+vars:
+  storage_uri: "gs://terraform-kube-dbt-demo/data/"
+
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"

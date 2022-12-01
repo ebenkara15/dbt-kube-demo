@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "dbt-bigquery.fullname" . }}
+spec:
+  schedule: {{ .Values.cronjob.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: {{ include "dbt-bigquery.serviceAccountName" . }}
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command:
+            - dbt
+            - run
+            volumeMounts:
+            - name: dbt-profile
+              mountPath: /usr/app/profiles.yml
+              subPath: profiles.yml
+
+          volumes:
+            - name: dbt-profile
+              configMap:
+                name: {{ .Values.configmap.name }}
+                items:
+                  - key: dbt-profile
+                    path: profiles.yml
+          restartPolicy: OnFailure

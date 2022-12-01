@@ -4,6 +4,7 @@ locals {
     "storage.googleapis.com",
     "container.googleapis.com",
     "bigquery.googleapis.com",
+    "artifactregistry.googleapis.com"
   ]
 }
 provider "google" {

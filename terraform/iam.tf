@@ -6,6 +6,14 @@ data "google_iam_role" "job-user" {
   name = "roles/bigquery.jobUser"
 }
 
+data "google_iam_role" "token-creator" {
+  name = "roles/iam.serviceAccountTokenCreator"
+}
+
+data "google_iam_role" "storage-viewer" {
+  name = "roles/storage.objectViewer"
+}
+
 # Dedicated SA for DBT workload
 resource "google_service_account" "this" {
   account_id   = "dbt-sa"
@@ -20,7 +28,9 @@ resource "google_project_iam_custom_role" "this" {
   permissions = setsubtract(
     concat(
       data.google_iam_role.data-editor.included_permissions,
-      data.google_iam_role.job-user.included_permissions
+      data.google_iam_role.job-user.included_permissions,
+      data.google_iam_role.token-creator.included_permissions,
+      data.google_iam_role.storage-viewer.included_permissions
     ),
     ["resourcemanager.projects.list"]
   )

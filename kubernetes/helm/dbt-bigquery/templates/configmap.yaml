@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.configmap.name }}
+  namespace: {{ .Release.Namespace }}
+data:
+  dbt-profile: |
+    kube_bq_jobs:
+      outputs:
+        dev:
+          dataset: dbt_data
+          fixed_retries: 1
+          location: europe-west1
+          method: oauth
+          priority: interactive
+          project: kube-dbt-demo
+          threads: 1
+          timeout_seconds: 300
+          type: bigquery
+      target: dev
+  

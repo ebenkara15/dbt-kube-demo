@@ -1,0 +1,31 @@
+# Default values for dbt-bigquery.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: "europe-west1-docker.pkg.dev/kube-dbt-demo/demo-repo/dbt-kube-demo"
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {
+      # Workload Identity binding between KSA and GSA
+      iam.gke.io/gcp-service-account: dbt-sa@kube-dbt-demo.iam.gserviceaccount.com,
+    }
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "dbt-sa"
+
+# The schedule for the CronJob
+cronjob:
+  schedule: "0 * * * *"
+
+# The name of the ConfigMap
+configmap:
+  name: dbt-profile-cm

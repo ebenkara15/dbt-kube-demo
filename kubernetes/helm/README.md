@@ -14,15 +14,15 @@ gcloud auth configure-docker
 
 Then build, tag and push to the Artifact Registry:
 ```bash
-docker build -t europe-west1-docker.pkg.dev/kube-dbt-demo/demo-repo/dbt-kube-demo:latest .
-docker push europe-west1-docker.pkg.dev/kube-dbt-demo/demo-repo/dbt-kube-demo:latest 
+docker build -t europe-west1-docker.pkg.dev/<project-id>/demo-repo/dbt-kube-demo:latest .
+docker push europe-west1-docker.pkg.dev/<project-id>/demo-repo/dbt-kube-demo:latest 
 ```
 
 ## :round_pushpin: Set Your Values
 
-You may be interested in modifying the `values.yaml` file to better fit your project setup especially if you modify the name of some resources when deploying your infrastructure with Terraform.
+You may be interested in modifying the `values.yaml` file to better fit your project setup especially if you modify the name of some resources when deploying your infrastructure with Terraform: adapt the project ID. 
 
-:warning: The ConfigMap is used to store the `profiles.yml` file that DBT uses. Review it before installing. 
+:warning: The ConfigMap is used to store the `profiles.yml` file that DBT uses. Review it before installing and change the name of the project if needed.
 
 ## :clapper: Installation
 

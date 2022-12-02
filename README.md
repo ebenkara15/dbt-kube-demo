@@ -48,3 +48,5 @@ You can run DBT locally if you want to check that DBT can correctly run your SQL
 You'll need to define your `profile.yml` in order to make DBT able to connect and query BigQuery. The default profile name is `kube_bq_jobs`. You can find an example in the ConfigMap [here](./kubernetes/helm/dbt-bigquery/templates/configmap.yaml).
 
 ### Deploy your CronJob to Kubernetes
+
+Follow the [README](./kubernetes/helm/README.md) in the `kubernetes/helm` folder

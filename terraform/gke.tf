@@ -1,4 +1,4 @@
-resource "google_container_cluster" "private" {
+resource "google_container_cluster" "this" {
   name     = "dbt-cluster"
   location = "europe-west1"
 

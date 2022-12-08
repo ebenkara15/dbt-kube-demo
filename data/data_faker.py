@@ -44,3 +44,4 @@ if __name__ == "__main__":
     customers = generate_customers()
     shops = generate_shops()
     generate_json(customers, shops)
+    print("Successfully generated random data.")
